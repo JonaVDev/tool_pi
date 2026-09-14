@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PI planning checklist</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>PI Planning Checklist</h1>
+        <br>
+        <h2 id="appVersion"></h2>
+        <br>
+    </header>
+    <p>Cuestionario base para iniciativas a tomar en el PI<br>
+    </p>
+    <br>
+    <fieldset>
+        <legend>Procesos administrativos</legend>
+        <br>
+        <div class="containersPI">
+            <label for="quickDiscovery"><b>Se completo el Quick Discovery:</b></label>
+            <select name="quickDiscovery" id="quickDiscovery">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+            <label for="solutioning"><b>Se completo el Solutioning:</b></label>
+            <select name="solutioning" id="solutioning">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+        </div>
+        <br>
+        <div class="containersPI">
+            <label for="acercamientoArq"><b>Acercamiento con arquitectura:</b></label>
+            <select name="acercamientoArq" id="acercamientoArq">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+            <label for="preCertificado"><b>Pre-certificado de arquitectura:</b></label>
+            <select name="preCertificado" id="preCertificado">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+        </div>
+        <br>
+        <div class="containersPI">
+            <label for="acercamientoFinOps"><b>Acercamiento con FinOps:</b></label>
+            <select name="acercamientoFinOps" id="acercamientoFinOps">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+            <label for="idPresupuesto"><b>ID de presupuesto:</b></label>
+            <select name="idPresupuesto" id="idPresupuesto">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+        </div>
+        <br> 
+        <div class="containersPI">
+            <label for="diagramaArquictectura"><b>Cuenta con diagrama de arquitectura:</b></label>
+            <select name="diagramaArquictectura" id="diagramaArquictectura">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+            <label for="fechaCompromiso"><b>Fecha Compromiso:</b></label>
+            <input type="date" name="fechaCompromiso" id="fechaCompromiso" autocomplete="off">
+        </div>
+        <br> 
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend>Referente a operación/ambiente</legend>
+        <br>
+        <div class="containersPI">
+            <label for="tipoInfra"><b>Cloud/On-Premise:</b></label>
+            <select name="tipoInfra" id="tipoInfra">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+            <label for="proveedorNube"><b>Proveedor Nube:</b></label>
+            <select name="proveedorNube" id="proveedorNube">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+        </div>
+        <br>
+        <div class="containersPI">
+            <label for="infraExistente"><b>Infraestructura nueva o existente:</b></label>
+            <select name="infraExistente" id="infraExistente">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+            <label for="inventarioInfra"><b>Inventario de infraestructura:</b></label>
+            <select name="inventarioInfra" id="inventarioInfra">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+        </div>
+        <br>
+        <div class="containersPI">
+            <label for="analisisTecnologias"><b>Analisis de necesidades tecnológicas:</b></label>
+            <select name="analisisTecnologias" id="analisisTecnologias">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+            <label for="numeroMicroservicios"><b>Número de microservicios contemplados:</b></label>
+            <select name="numeroMicroservicios" id="numeroMicroservicios">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+        </div>
+        <br>
+        <div class="containersPI">
+            <label for="analisisRecursos"><b>Analisis de recursos (CPU, RAM, Almacenamiento):</b></label>
+            <select name="analisisRecursos" id="analisisRecursos">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+            <label for="analisisVolumetria"><b>Analisis de volumetria (Proveedores, BD, flujo de usuarios):</b></label>
+            <select name="analisisVolumetria" id="analisisVolumetria">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+        </div>
+        <br>     
+        <div class="containersPI">
+            <label for="stackTecnologico"><b>Capa de servicio/Tecnologia(Seleccionar las que apliquen):</b></label>
+            <select name="stackTecnologico" id="stackTecnologico">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+            <label for="stackVersion"><b>Framework/Stack Version:</b></label>
+            <select name="stackVersion" id="stackVersion">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+        </div>
+        <br>        
+        <div class="containersPI">
+            <label for="tipoConsumo"><b>Consumo interno o externo:</b></label>
+            <select name="tipoConsumo" id="tipoConsumo">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+            <label for="tipoComunicacion"><b>Canal inbound u outbound:</b></label>
+            <select name="tipoComunicacion" id="tipoComunicacion">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+        </div>
+        <br>
+        <div class="containersPI">
+            <label for="hostName"><b>Nombre del host para consumos:</b></label>
+            <select name="hostName" id="hostName">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+            <label for="capasAdicionalesConsumo"><b>Capas adicionales para el consumo:</b></label>
+            <select name="capasAdicionalesConsumo" id="capasAdicionalesConsumo">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select>
+        </div>
+        <br>
+    </fieldset>
+    <fieldset>
+        <legend>Comentarios y evidencias</legend>
+        <br>
+        <label for="comentarios"><b>Comentarios adicionales:</b></label>
+        <textarea name="comentarios" id="comentarios"></textarea>
+        <br>
+        <label for="image-paste"><b>Evidencias adicionales:</b>
+            <span id="details_evidence"><b>(Capturas de pantalla relacionadas)</b></span>
+        </label>
+        <br>
+        <div name="image-paste" id="image-paste" contenteditable="false">
+            <p>Pega tus evidencias aqui.</p>
+        </div>
+        <br>
+        <input class="button" type="button" id="removeEvidenceBtn"  value="Limpiar evidencias">
+        <br>
+        <br>
+        <div name="output" id="output" contenteditable="true">
+            <img id="michi" src="static/images/my_cat.png" alt="cat coughing">
+        </div>
+        <br>
+        <br>
+        <input class="button" type="button" id="create_comment"  value="Crear comentario">
+        <br>
+        <input class="button"type="button" id="copy_comment" value="Copiar">
+        <br>
+        <input class="button"type="button" id="clear_content" value="Limpiar valores">
+        <br>
+    </fieldset>
+Tiempo de pruebas
+    <script type="module" src="static/js/script.js"></script>
+</body>
+<footer> Aun no tengo.</footer>
+</html>
