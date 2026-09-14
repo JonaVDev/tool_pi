@@ -1,7 +1,12 @@
-import { apiApigee } from "./apiApigee.js";
+import { standardResponses } from './standardResponses.js';
+import { standardCompliance } from './standardCompliance.js';
+import { infraType } from './infraType.js';
+import { cloudProvider } from './cloudProvider.js';
+import { infraStatus } from './infraStatus.js';
+import { techAnalysis } from './techAnalysis.js';
 
 let imagesArray = [];
-const appVersionBuild = "Version 5.6.1"
+const appVersionBuild = "Version 1.0.0"
 
 document.addEventListener('DOMContentLoaded', contentLoaded);
 
@@ -12,24 +17,15 @@ function contentLoaded() {
     const clearContent = document.getElementById('clear_content');
     const removeEvidenceBtn = document.getElementById('removeEvidenceBtn');
 
-    const projectID = document.getElementById('proyectoAfore')
-    const tecnologia = document.getElementById('tecnologia');
-    createTipoOptions();
-    createCloudOptions();
-    createResources();
-    createProjectOptions();
-    creteFeedbackOptions();
-    createResultOptions();
-    createStageEnvs();
-    createStacks();
     updateVersion();
+    standardResponse();
+    standardComplianceResponse();
+    createSelects('tipoInfra', infraType);
+    createSelects('proveedorNube', cloudProvider);
+    createSelects('infraExistente', infraStatus);
+    createSelects('analisisTecnologias', techAnalysis);
 
-    if (projectID || tecnologia ) {
-        projectID.addEventListener('change',showTech)   
-    }
-    if (tecnologia ) {
-        tecnologia.addEventListener('change',showTech)
-    }  
+  
     if (createComment) {
         createComment.addEventListener('click', postComment);
     }
@@ -62,7 +58,6 @@ function updateVersion(){
     appVersion.textContent = appVersionBuild;
 }
 
-
 function createOptionSelect (selectToProcess, optionValue, optionText = optionValue) {
 
     const newOption = document.createElement('option');
@@ -72,128 +67,44 @@ function createOptionSelect (selectToProcess, optionValue, optionText = optionVa
     return selectToProcess;
 }
 
-function createResultOptions(){
-    const selectResult = document.getElementById('resultado');
-    createDefaultOption(selectResult);
-    Object.keys(dictResultado).forEach((resultado, index) => {
-        if (index ===0){
-            return;
-        }
-        const textinfo = dictResultado[resultado][1];
-        createOptionSelect(selectResult,resultado, textinfo);
-    });
-}
+function standardResponse(){
 
-function creteFeedbackOptions(){
-    const selectFeedback = document.getElementById('feedback');
-    createDefaultOption(selectFeedback);
+    const selectIDs = ['quickDiscovery','solutioning','acercamientoArq','acercamientoFinOps'];
     
-    Object.keys(dictFeedback).forEach((feedback) => {
-        const textinfo = dictFeedback[feedback];
-        createOptionSelect(selectFeedback, feedback, textinfo);
-    });
-}
+    const selects = selectIDs.map(id => document.getElementById(id));
 
-function createTipoOptions(){
-    const selectTipo = document.getElementById('tipo');
-    createDefaultOption(selectTipo);
-
-    Object.entries(dictTipo).forEach(([category, taskType]) => {
-        const group = document.createElement('optgroup');
-        group.label = category;
-
-        Object.entries(taskType).forEach(([key, value]) =>{
-            createOptionSelect(group, key, value);
+    selects.forEach(select => {
+        createDefaultOption(select);
+        standardResponses.forEach(response => {
+            createOptionSelect(select, response);
         });
-        selectTipo.append(group);
     });
 }
 
-function createStacks(){
-    const selectTecnologia = document.getElementById('tecnologia');
-    createDefaultOption(selectTecnologia);
-    stacks.forEach(stack => {
-        createOptionSelect(selectTecnologia, stack);
+
+function createSelects(selectID, optionsArray) {
+    const select = document.getElementById(selectID);
+    if (!select) return;
+
+    createDefaultOption(select);
+    optionsArray.forEach(option => {
+        createOptionSelect(select, option);
     });
-    
+
 }
 
-function createResources(){
-    const selectResources = document.getElementById('resources');
-    createDefaultOption(selectResources);
-    resources.forEach(resource => {
-        createOptionSelect(selectResources, resource);
-    });
-    
-}
-function createCloudOptions(){
-    const selectCloudClasses = document.getElementById('cloudClasses');
-    createDefaultOption(selectCloudClasses);
-    cloudClasses.forEach(cloudClass => {
-        createOptionSelect(selectCloudClasses, cloudClass);
-    });
-    
-}
 
-function createStageEnvs(){
-    const selectStageEnv = document.getElementById('stage');
-    createDefaultOption(selectStageEnv);
+function standardComplianceResponse(){
+    const selectIDs = ['diagramaArquitectura','idPresupuesto','preCertificado'];
+    const selects = selectIDs.map(id => document.getElementById(id));
 
-    Object.entries(stageEnvs).forEach(([category, stageType]) =>{
-        const group = document.createElement('optgroup');
-        group.label = category;
-
-        Object.entries(stageType).forEach(([key, value]) =>{
-            createOptionSelect(group, key, value);
+    selects.forEach(select => {
+        createDefaultOption(select);
+        standardCompliance.forEach(response => {
+            createOptionSelect(select, response);
         });
-        selectStageEnv.append(group);
     });
-    // Object.keys(stageEnvs).forEach(stageEnv => {
-    //     createOptionSelect(selectStageEnv, stageEnv);
-    // });
 }
-
-function createProjectOptions(){
-    const selectProject = document.getElementById('proyectoAfore');
-    createDefaultOption(selectProject);
-
-    Object.entries(projects).forEach(([category, bizGroup]) => {
-        const group = document.createElement('optgroup');
-        group.label = category;
-
-        bizGroup.forEach((projectName) => {
-            createOptionSelect(group, projectName);
-        });
-        selectProject.append(group);
-    });
-    
-    
-    
-    // .forEach(project => {
-    //     createOptionSelect(selectProject, project);
-    // });
-}
-
-
-function setTheme(themeName){
-    if (themeName === document.body.classList.value){
-        document.body.classList.toggle(themeName);
-    } else {
-        document.body.classList.remove('dark-mode', 'hacker-mode', 'pony-mode');
-        document.body.classList.add(themeName);
-    }
-    updateMichiImage();
-}
-
-function updateMichiImage(){
-    const michi = document.getElementById('michi');
-    if (document.body.classList.contains('pony-mode')) {
-        michi.src = 'static/images/my_cat_unicorn.png';
-    } else {
-        michi.src = 'static/images/my_cat.png';
-    }
-}
-
 
 function createDefaultOption (servicio){
     while (servicio.firstChild) {
@@ -203,7 +114,7 @@ function createDefaultOption (servicio){
     const defaultOption = document.createElement('option');
     defaultOption.value = "";
     defaultOption.textContent = "Selecciona una opción";
-    defaultOption.disabled = true;
+    defaultOption.disabled = false;
     defaultOption.selected = true;
     servicio.appendChild(defaultOption);
 
@@ -214,65 +125,6 @@ function createDefaultOption (servicio){
     
 }
 
-function createApiOptions (apis, servicio, proyecto){
-    console.log (proyecto.value);
-    console.log (apis[proyecto.value]);
-    apis[proyecto.value].forEach(api => {
-        const apiOption = document.createElement('option');
-        apiOption.value = api;
-        apiOption.textContent = api;
-        servicio.appendChild(apiOption)
-    });
-}
-
-
-function showTech() {
-    console.log("I'm being called")
-    const servicio = document.getElementById('servicio');
-    const tecnologia = document.getElementById('tecnologia');
-    const proyecto = document.getElementById('proyectoAfore');
-    console.log(tecnologia.value);
-    console.log(tecnologia);
-    console.log(proyecto.value);
-    if (tecnologia.value && proyecto.value) {
-        createDefaultOption (servicio);
-        switch (tecnologia.value) {
-            case 'Angular':
-                createApiOptions (apiAngular,servicio, proyecto);
-                break;
-            case 'Springboot':
-                createApiOptions (apiSpringboot,servicio, proyecto);
-                break;
-            case 'Apigee':
-                createApiOptions (apiApigee, servicio, proyecto);
-                break;
-            case 'Mulesoft':
-                createApiOptions (apiMulesoft, servicio, proyecto);
-                break;
-            case 'Modyo':
-                createApiOptions (modyo, servicio, proyecto);
-                break;
-            case 'Python':
-                createApiOptions (apiPython, servicio, proyecto);
-                break;
-            case 'Flask':
-                createApiOptions (apiPython, servicio, proyecto);
-                break;
-            case 'ScriptsSQL':
-                createApiOptions (scriptsSQL, servicio, proyecto);
-                break;
-            case 'SIWEB':
-                createApiOptions (apiSIWEB, servicio, proyecto);
-                break;
-            case 'Springboot, Mulesoft, Apigee':
-                createApiOptions (apiTodos, servicio, proyecto);
-                break;
-        }
-    } 
-    else {
-        console.log('Arregla esto luego');
-    }
-}
 
 function getBase64(file) {
     return new Promise((resolve, reject) => {
