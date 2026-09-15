@@ -4,6 +4,13 @@ import { infraType } from './infraType.js';
 import { cloudProvider } from './cloudProvider.js';
 import { infraStatus } from './infraStatus.js';
 import { techAnalysis } from './techAnalysis.js';
+import { infraInventory } from './infraInventory.js';
+import { communication } from './communication.js';
+import { channelType } from './channeltype.js';
+import { additionalLayers } from './additionalLayers.js';
+import { resourceAnalysis } from './resourceAnalysis.js';
+import { volumetryAnalysis } from './volumetryAnalysis.js';
+import { stackSupported } from './stackSupported.js';
 
 let imagesArray = [];
 const appVersionBuild = "Version 1.0.0"
@@ -24,6 +31,13 @@ function contentLoaded() {
     createSelects('proveedorNube', cloudProvider);
     createSelects('infraExistente', infraStatus);
     createSelects('analisisTecnologias', techAnalysis);
+    createSelects('inventarioInfra', infraInventory);
+    createSelects('tipoConsumo', communication);
+    createSelects('tipoComunicacion', channelType);
+    createSelects('capasAdicionalesConsumo', additionalLayers);
+    createSelects('analisisRecursos', resourceAnalysis);
+    createSelects('analisisVolumetria', volumetryAnalysis);
+    createSelects('stackTecnologico', stackSupported);
 
   
     if (createComment) {

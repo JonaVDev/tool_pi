@@ -1,0 +1,16 @@
+export const stackSupported = [
+    "GoLang",
+    "Python",
+    "Java SpringBoot",
+    "Java Jersey",
+    "Java Dependency",
+    "Angular",
+    "Modern.js(React)",
+    "DataFlow",
+    "Swift (desacreditado)",
+    "AppScript (desacreditado)",
+    "C++ (desacreditado)",
+    "Flask (desacreditado)",
+    "Next.js (desacreditado)",
+    "PHP (desacreditado)",
+    ]
