@@ -129,7 +129,7 @@ function createDefaultOption (servicio){
     defaultOption.value = "";
     defaultOption.textContent = "Selecciona una opción";
     defaultOption.disabled = false;
-    defaultOption.selected = true;
+    defaultOption.selected = false;
     servicio.appendChild(defaultOption);
 
     if (servicio.id=="servicio"){
@@ -195,78 +195,53 @@ function escapeHTML(text) {
 function postComment() {
 
     let message = ``;
-    const tipo = document.getElementById('tipo');
-    const stage = document.getElementById('stage');
-    const tecnologia = document.getElementById('tecnologia');
-    const servicio = document.getElementById('servicio');
-    const namespace = document.getElementById('namespace');
-    const resultado = document.getElementById('resultado');
-    const output = document.getElementById('output');
-    const feedback = document.getElementById('feedback');
-    const commentarios = document.getElementById('comentarios');
-    const codeComment = document.getElementById('code-comment');
-    const ticket = document.getElementById('ticket');
-    const proyectoAfore = document.getElementById('proyectoAfore');
-    const stackVer = document.getElementById('stackVer');
-    const cloudClasses = document.getElementById('cloudClasses');
-    const resources = document.getElementById('resources');
+    const idsData = [
+        'quickDiscovery', 'solutioning', 'acercamientoArq', 'preCertificado',
+        'acercamientoFinOps', 'idPresupuesto', 'diagramaArquitectura', 'fechaCompromiso',
+        'tipoInfra', 'proveedorNube', 'infraExistente', 'inventarioInfra',
+        'analisisTecnologias', 'numeroMicroservicios', 'analisisRecursos', 'analisisVolumetria',
+        'stackTecnologico', 'stackVersion', 'tipoConsumo', 'tipoComunicacion',
+        'hostName', 'capasAdicionalesConsumo', 'comentarios'
+    ];
 
-    const infoHeader = dictTipo[tipo.value] || tipo.value;
-    message = `<b>${proyectoAfore.value} || ${infoHeader} ${ticket.value}</b>`;
-    message += `<br><br>
-            <b>Descripción:</b><br>
-            <br>`;
-    message += getMessage(tipo);
-    message += `<ul>`;
-    message +=`<li><b>${stage.value}</b></li>` 
-    message += '</ul>';
+    const arrayData = idsData.reduce((acc, id) => {
+        acc[id] = document.getElementById(id)?.value ?? '';
+        return acc;
+    }, {});
 
-    if ( tecnologia.value != "") {
-        message += `Impacta en la tecnologia:<br>
-                    <ul> 
-                    <li><b>${tecnologia.value}</b></li>
-                    </ul>`;
-    }
-    if (servicio.value !="") {
-        message += `Para el/los servicio(s):<br>
-                    <ul>
-                    <li><b>${servicio.value}</b></li>
-                    </ul>`;
-    }
-
-    message += `<br>
-                <b>Detalles:</b><br>
+    message += `<b>Resumen:</b><br>
                 <br>
-                Actividad: <i>${tipo.value}</i><br>
-                Ambiente/Plataforma: <i>${stage.value}</i><br>`
+                <ul>
+                    <li><b>Quick Discovery:</b> ${arrayData.quickDiscovery}</li>
+                    <li><b>Solutioning:</b> ${arrayData.solutioning}</li>
+                    <li><b>Acercamiento Arquitectura:</b> ${arrayData.acercamientoArq}</li>
+                    <li><b>Pre Certificado:</b> ${arrayData.preCertificado}</li>
+                    <li><b>Acercamiento FinOps:</b> ${arrayData.acercamientoFinOps}</li>
+                    <li><b>ID Presupuesto:</b> ${arrayData.idPresupuesto}</li>
+                    <li><b>Diagrama Arquitectura:</b> ${arrayData.diagramaArquitectura}</li>
+                    <li><b>Fecha Compromiso:</b> ${arrayData.fechaCompromiso}</li>
+                </ul>`;
+    message += `<br><b>Infraestructura:</b><br>
+                <br>
+                <ul>
+                    <li><b>Tipo Infra:</b> ${arrayData.tipoInfra}</li>
+                    <li><b>Proveedor Nube:</b> ${arrayData.proveedorNube}</li>
+                    <li><b>Infra Existente:</b> ${arrayData.infraExistente}</li>
+                    <li><b>Inventario Infra:</b> ${arrayData.inventarioInfra}</li>
+                    <li><b>Análisis Tecnologías:</b> ${arrayData.analisisTecnologias}</li>
+                    <li><b>Número Microservicios:</b> ${arrayData.numeroMicroservicios}</li>
+                    <li><b>Análisis Recursos:</b> ${arrayData.analisisRecursos}</li>
+                    <li><b>Análisis Volumetría:</b> ${arrayData.analisisVolumetria}</li>
+                    <li><b>Stack Tecnológico:</b    > ${arrayData.stackTecnologico}</li>
+                    <li><b>Stack Version:</b> ${arrayData.stackVersion}</li>
+                    <li><b>Tipo Consumo:</b> ${arrayData.tipoConsumo}</li>
+                    <li><b>Tipo Comunicación:</b> ${arrayData.tipoComunicacion}</li>
+                    <li><b>Host Name:</b> ${arrayData.hostName}</li>
+                    <li><b>Capas Adicionales Consumo:</b> ${arrayData.capasAdicionalesConsumo}</li>
+                </ul>`;
 
-    if (( servicio.value !="")){
-        message += `Servicio: <i>${servicio.value}</i><br>`;  
-    }
-    if (( tecnologia.value !="")){
-        message += `Tecnologia: <i>${tecnologia.value}</i><br>`;  
-    }
-    if (stackVer.value != "") {
-        message+= `Framework/Stack version: `;
-        message+= `<i>${stackVer.value}</i><br>`;
-        }
-    if (namespace.value != "") {
-        message += `NameSpace: `;
-        message += `<i>${namespace.value}</i><br>`;    
-        }
-    if (resources.value != "") {
-        message += `Recurso: `;
-        message += `<i>${resources.value}</i><br>`;    
-        }
-    if (cloudClasses.value != "") {
-        message += `Cloud/On-premise: `;
-        message += `<i>${cloudClasses.value}</i><br>`;
-    }    
-    if (feedback.value != "") {
-        message += `<br><b>${feedback.value}</b><br><br>`;
-    }
-    if (commentarios.value != "") {
-        const lines = commentarios.value.split('\n').filter(line => line.trim() !== '');
+    if (arrayData.comentarios != "") {
+        const lines = arrayData.comentarios.split('\n').filter(line => line.trim() !== '');
         let finalComment = '';
         lines.forEach( line => {
             finalComment += `<p class="p_comment">${escapeHTML(line)}</p>`;
@@ -275,17 +250,7 @@ function postComment() {
         message += `${finalComment}`;
         message += `<br>`;
     }
-    if (codeComment.value != "") {
-        const lines = codeComment.value.split('\n').filter(line => line.trim() !== '');
-        let finalCodeComment = '';
-        lines.forEach(line => {
-            finalCodeComment += `<code>${escapeHTML(line)}</code><br>`;
-        });
-        message += `<br><b>Informacion técnica/Código relacionado:</b><br><pre><p class="p_code"><b>${finalCodeComment}</b></p></pre>`
-    }
 
-    const infoResult = dictResultado[resultado.value][0](resultado) || resultado.value;
-    message += `${infoResult}`;
 
 
     imagesArray.forEach(url => {
@@ -297,24 +262,17 @@ function postComment() {
 
 function clearAllFields() {
     const elementsToClear = [
-        document.getElementById('ticket'),
-        document.getElementById('tipo'),
-        document.getElementById('stage'),
-        document.getElementById('tecnologia'),
-        document.getElementById('servicio'),
-        document.getElementById('resultado'),
-        document.getElementById('namespace'),
-        document.getElementById('feedback'),
-        document.getElementById('comentarios'),
-        document.getElementById('code-comment'),
-        document.getElementById('proyectoAfore'),
-        document.getElementById('stackVer'),
-        document.getElementById('cloudClasses'),
-        document.getElementById('resources')
+        'quickDiscovery', 'solutioning', 'acercamientoArq', 'preCertificado',
+        'acercamientoFinOps', 'idPresupuesto', 'diagramaArquitectura', 'fechaCompromiso',
+        'tipoInfra', 'proveedorNube', 'infraExistente', 'inventarioInfra',
+        'analisisTecnologias', 'numeroMicroservicios', 'analisisRecursos', 'analisisVolumetria',
+        'stackTecnologico', 'stackVersion', 'tipoConsumo', 'tipoComunicacion',
+        'hostName', 'capasAdicionalesConsumo', 'comentarios'
     ];
 
 
-    for (const elementToClear of elementsToClear) {
+    for (const id of elementsToClear) {
+        const elementToClear = document.getElementById(id);
         if (elementToClear) {
             elementToClear.value = "";
             if (elementToClear.tagName === 'FIELDSET') {
@@ -326,7 +284,7 @@ function clearAllFields() {
     const output = document.getElementById('output');
     const evidence = document.getElementById('image-paste');
     evidence.innerHTML = `<p>Pega tus evidencias aqui.</p>`;
-    output.innerHTML = '<img id="michi" name="michi" src="static/images/my_cat.png" alt="cat coughing">';
+    output.innerHTML = '<img id="SCM" name="SCM" src="static/images/SCM.png" alt="SCM">';
     imagesArray = [];
 }
 

@@ -34,6 +34,7 @@ html {
     --text-color-highlight: #6A057F;
 }
 
+
 .button:hover,
 .button:active {
   background-color: var(--button-select);
@@ -393,7 +394,7 @@ div {
   color: var(--text-color-highlight);
 }
 
-.uwulicious {
+.containersPI {
     display: grid;
     grid-template-columns: 160px 1fr 160px 1fr;
     gap: 40px;
@@ -406,7 +407,7 @@ div {
     color: var(--text-color-black);
 }
 
-body.dark-mode .uwulicious {
+body.dark-mode .containersPI {
     display: grid;
     grid-template-columns: 160px 1fr 160px 1fr;
     gap: 40px;
@@ -419,56 +420,64 @@ body.dark-mode .uwulicious {
     color: var(--text-color-black);
 }
 
-.uwulicious label  {
-    white-space: nowrap;
+.containersPI label  {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    min-width: 0;
     width: auto;
-    text-align: right;
-    margin-right: 10;
+    text-align: center;
+    margin-right: 10px;
 }
 
-body.dark-mode .uwulicious label  {
-    white-space: nowrap;
+body.dark-mode .containersPI label  {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    min-width: 0;
     width: auto;
-    text-align: right;
-    margin-right: 10;
+    text-align: center;
+    margin-right: 10px;
 }
-body.hacker-mode .uwulicious label  {
-    white-space: nowrap;
+body.hacker-mode .containersPI label  {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    min-width: 0;
     width: auto;
-    text-align: right;
-    margin-right: 10;
-}
-
-body.pony-mode .uwulicious label  {
-    white-space: nowrap;
-    width: auto;
-    text-align: right;
-    margin-right: 10;
+    text-align: center;
+    margin-right: 10px;
 }
 
-.uwulicious select, .uwulicious input {
+body.pony-mode .containersPI label  {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    min-width: 0;
+    width: auto;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.containersPI select, .containersPI input {
     width: 160px;
     box-sizing: border-box;
     min-width: 200px;
 }
 
-body.dark-mode .uwulicious select, .uwulicious input {
+body.dark-mode .containersPI select, .containersPI input {
     width: 160px;
     box-sizing: border-box;
     min-width: 200px;
 }
-body.hacker-mode .uwulicious select, .uwulicious input {
+body.hacker-mode .containersPI select, .containersPI input {
     width: 160px;
     box-sizing: border-box;
     min-width: 200px;
 }
-body.pony-mode .uwulicious select, .uwulicious input {
+body.pony-mode .containersPI select, .containersPI input {
     width: 160px;
     box-sizing: border-box;
     min-width: 200px;
 }
 
-#michi {
+#SCM {
     display: block;
     margin: 0 auto;
     place-content: center;
