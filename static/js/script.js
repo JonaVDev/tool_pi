@@ -193,7 +193,7 @@ function escapeHTML(text) {
 }
 
 function postComment() {
-
+    let riskFlag = 0;
     let message = ``;
     const idsData = [
         'quickDiscovery', 'solutioning', 'acercamientoArq', 'preCertificado',
@@ -211,11 +211,35 @@ function postComment() {
 
     message += `<b>Resumen:</b><br>
                 <br>
-                <ul>
-                    <li><b>Quick Discovery:</b> ${arrayData.quickDiscovery}</li>
-                    <li><b>Solutioning:</b> ${arrayData.solutioning}</li>
-                    <li><b>Acercamiento Arquitectura:</b> ${arrayData.acercamientoArq}</li>
-                    <li><b>Pre Certificado:</b> ${arrayData.preCertificado}</li>
+                <ul>`
+    if (arrayData.quickDiscovery == "No" || arrayData.quickDiscovery == "Desconozco de ese proceso(s)") {
+        message += `<li><b>Quick Discovery:</b> ${arrayData.quickDiscovery} - Proyecto en riesgo 🚩</li>`;
+        riskFlag++;
+    } else {
+        message += `<li><b>Quick Discovery:</b> ${arrayData.quickDiscovery}</li>`;
+    }
+
+    if (arrayData.solutioning == "No" || arrayData.solutioning == "Desconozco de ese proceso(s)") {
+        message += `<li><b>Solutioning:</b> ${arrayData.solutioning} - Proyecto en riesgo 🚩</li>`;
+        riskFlag++;
+    } else {
+        message += `<li><b>Solutioning:</b> ${arrayData.solutioning}</li>`;
+    }
+
+    if (arrayData.acercamientoArq == "No" || arrayData.acercamientoArq == "Desconozco de ese proceso(s)") {
+        message += `<li><b>Acercamiento Arquitectura:</b> ${arrayData.acercamientoArq} - Proyecto en riesgo 🚩</li>`;
+        riskFlag++;
+    } else {
+        message += `<li><b>Acercamiento Arquitectura:</b> ${arrayData.acercamientoArq}</li>`;
+    }
+
+    if (arrayData.preCertificado == "No cuento con el" || arrayData.preCertificado == "Desconozco de ese proceso(s)") {
+        message += `<li><b>Pre Certificado:</b> ${arrayData.preCertificado} - Proyecto en riesgo 🚩</li>`;
+        riskFlag++;
+    } else {
+        message += `<li><b>Pre Certificado:</b> ${arrayData.preCertificado}</li>`;
+    }
+    message += `
                     <li><b>Acercamiento FinOps:</b> ${arrayData.acercamientoFinOps}</li>
                     <li><b>ID Presupuesto:</b> ${arrayData.idPresupuesto}</li>
                     <li><b>Diagrama Arquitectura:</b> ${arrayData.diagramaArquitectura}</li>
@@ -239,6 +263,7 @@ function postComment() {
                     <li><b>Host Name:</b> ${arrayData.hostName}</li>
                     <li><b>Capas Adicionales Consumo:</b> ${arrayData.capasAdicionalesConsumo}</li>
                 </ul>`;
+    
 
     if (arrayData.comentarios != "") {
         const lines = arrayData.comentarios.split('\n').filter(line => line.trim() !== '');
@@ -250,7 +275,7 @@ function postComment() {
         message += `${finalComment}`;
         message += `<br>`;
     }
-
+    message += `<br><b>Flags de riesgo:</b> ${riskFlag}<br>`;
 
 
     imagesArray.forEach(url => {
