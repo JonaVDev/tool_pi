@@ -233,16 +233,32 @@ function postComment() {
         message += `<li><b>Acercamiento Arquitectura:</b> ${arrayData.acercamientoArq}</li>`;
     }
 
-    if (arrayData.preCertificado == "No cuento con el" || arrayData.preCertificado == "Desconozco de ese proceso(s)") {
+    if (arrayData.preCertificado == "No cuento con el" || arrayData.preCertificado == "Esta en proceso" || arrayData.preCertificado == "No se con quien solicitarlo") {
         message += `<li><b>Pre Certificado:</b> ${arrayData.preCertificado} - Proyecto en riesgo 🚩</li>`;
         riskFlag++;
     } else {
         message += `<li><b>Pre Certificado:</b> ${arrayData.preCertificado}</li>`;
     }
+
+    if (arrayData.acercamientoFinOps == "No" || arrayData.acercamientoFinOps == "Desconozco de ese proceso(s)" ) {
+        message += `<li><b>Acercamiento FinOps:</b> ${arrayData.acercamientoFinOps} - Proyecto en riesgo 🚩</li>`;
+        riskFlag++;
+    } else {
+        message += `<li><b>Acercamiento FinOps:</b> ${arrayData.acercamientoFinOps}</li>`;
+    }
     message += `
-                    <li><b>Acercamiento FinOps:</b> ${arrayData.acercamientoFinOps}</li>
-                    <li><b>ID Presupuesto:</b> ${arrayData.idPresupuesto}</li>
-                    <li><b>Diagrama Arquitectura:</b> ${arrayData.diagramaArquitectura}</li>
+                    <li><b>ID Presupuesto:</b> ${arrayData.idPresupuesto}</li>`
+    
+    if (arrayData.diagramaArquitectura == "No cuento con el" || arrayData.diagramaArquitectura == "Esta en proceso" || arrayData.diagramaArquitectura == "No se con quien solicitarlo" ) {
+        message += `<li><b>Diagrama Arquitectura::</b> ${arrayData.diagramaArquitectura} - Proyecto en riesgo 🚩</li>`;
+        riskFlag++;
+    } else {
+        message += `<li><b>Diagrama Arquitectura::</b> ${arrayData.diagramaArquitectura}</li>`;
+    }
+
+
+
+    message += `
                     <li><b>Fecha Compromiso:</b> ${arrayData.fechaCompromiso}</li>
                 </ul>`;
     message += `<br><b>Infraestructura:</b><br>
